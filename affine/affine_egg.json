@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "version": "PTDL_v1",
+    "update_url": null
+  },
+  "exported_at": "2025-05-28T14:33:13-04:00",
+  "name": "AFFiNE",
+  "author": "your.email@example.com",
+  "description": "Self-hosted AFFiNE collaborative workspace",
+  "features": null,
+  "docker_images": {
+    "Node.js 18 Alpine": "ghcr.io/pterodactyl/yolks:nodejs_18"
+  },
+  "file_denylist": [],
+  "startup": "node ./scripts/self-host-predeploy && node ./dist/index.js",
+  "config": {
+    "files": "{}",
+    "startup": "{\n  \"done\": \"Listening on port\"\n}",
+    "logs": "{}",
+    "stop": "stop"
+  },
+  "scripts": {
+    "installation": {
+      "script": "apt update && apt install -y git && git clone https://github.com/toeverything/affine.git . && yarn install && yarn build",
+      "container": "node:18-alpine",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "AFFiNE Port",
+      "description": "Port on which AFFiNE will run",
+      "env_variable": "PORT",
+      "default_value": "3000",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer"
+    }
+  ]
+}
